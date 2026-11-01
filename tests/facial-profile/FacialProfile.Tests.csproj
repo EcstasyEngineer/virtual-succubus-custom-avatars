@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType><TargetFramework>net8.0</TargetFramework>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+    <GameDir Condition="'$(GameDir)' == ''">$(VIRTUAL_GAME_DIR)</GameDir>
+    <Managed>$(GameDir)\Virtual Succubus_Data\Managed</Managed>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="../../src/FacialIntent.cs" Link="FacialIntent.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="../../src/AniFacialAdapter.cs" />
+    <Compile Include="../../src/FacialProfile.cs" />
+    <Reference Include="UnityEngine"><HintPath>$(Managed)\UnityEngine.dll</HintPath></Reference>
+    <Reference Include="UnityEngine.CoreModule"><HintPath>$(Managed)\UnityEngine.CoreModule.dll</HintPath></Reference>
+    <Reference Include="UnityEngine.AnimationModule"><HintPath>$(Managed)\UnityEngine.AnimationModule.dll</HintPath></Reference>
+  </ItemGroup>
+</Project>

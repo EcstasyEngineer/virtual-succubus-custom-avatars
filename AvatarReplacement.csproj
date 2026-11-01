@@ -1,0 +1,54 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <AssemblyName>EcstasyEngineer.AvatarReplacement</AssemblyName>
+    <GameDir Condition="'$(GameDir)' == ''">$(VIRTUAL_GAME_DIR)</GameDir>
+    <Managed>$(GameDir)\Virtual Succubus_Data\Managed</Managed>
+    <VrmRuntimeDir Condition="'$(VrmRuntimeDir)' == ''">$(MSBuildProjectDirectory)\runtime</VrmRuntimeDir>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+    <Deterministic>true</Deterministic>
+    <PathMap>$(MSBuildProjectDirectory)=/_/AvatarReplacement</PathMap>
+    <IncludeSourceRevisionInInformationalVersion>false</IncludeSourceRevisionInInformationalVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)' == 'Release'">
+    <DebugType>none</DebugType>
+    <DebugSymbols>false</DebugSymbols>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="src\FacialIntent.cs" />
+    <Compile Include="src\Plugin.cs" />
+    <Compile Include="src\RuntimeDiagnostics.cs" />
+    <Compile Include="src\FacialDiagnostics.cs" />
+    <Compile Include="src\AniFacialAdapter.cs" />
+    <Compile Include="src\VrmFacialAdapter.cs" />
+    <Compile Include="src\VrmRuntimeLoader.cs" />
+    <Compile Include="src\FacialProfile.cs" />
+    <Compile Include="src\HierarchyPaths.cs" />
+    <Compile Include="src\ModelMenu.cs" />
+    <Compile Include="src\ModelCatalog.cs" />
+    <Compile Include="src\AvatarHeight.cs" />
+    <Compile Include="src\UiKit.cs" />
+    <Compile Include="src\DebugPanel.cs" />
+    <Compile Include="src\TextureCache.cs" />
+    <Reference Include="UnityEngine.UIModule"><HintPath>$(Managed)\UnityEngine.UIModule.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="UnityEngine.TextRenderingModule"><HintPath>$(Managed)\UnityEngine.TextRenderingModule.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="UnityEngine.UI"><HintPath>$(Managed)\UnityEngine.UI.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="UnityEngine.InputLegacyModule"><HintPath>$(Managed)\UnityEngine.InputLegacyModule.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="UnityEngine.PhysicsModule"><HintPath>$(Managed)\UnityEngine.PhysicsModule.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="BepInEx"><HintPath>$(GameDir)\BepInEx\core\BepInEx.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="UnityEngine"><HintPath>$(Managed)\UnityEngine.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="UnityEngine.CoreModule"><HintPath>$(Managed)\UnityEngine.CoreModule.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="UnityEngine.AnimationModule"><HintPath>$(Managed)\UnityEngine.AnimationModule.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="UnityEngine.AssetBundleModule"><HintPath>$(Managed)\UnityEngine.AssetBundleModule.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="UnityEngine.JSONSerializeModule"><HintPath>$(Managed)\UnityEngine.JSONSerializeModule.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="UniGLTF"><HintPath>$(VrmRuntimeDir)\UniGLTF.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="UniGLTF.Utils"><HintPath>$(VrmRuntimeDir)\UniGLTF.Utils.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="VRM"><HintPath>$(VrmRuntimeDir)\VRM.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="VRM10"><HintPath>$(VrmRuntimeDir)\VRM10.dll</HintPath><Private>false</Private></Reference>
+  </ItemGroup>
+  <Target Name="CheckInputs" BeforeTargets="ResolveAssemblyReferences">
+    <Error Condition="!Exists('$(Managed)\UnityEngine.CoreModule.dll')" Text="Set VIRTUAL_GAME_DIR or pass -p:GameDir for your local game installation. No game binaries are distributed." />
+    <Error Condition="!Exists('$(VrmRuntimeDir)\VRM.dll')" Text="Pass -p:VrmRuntimeDir pointing at the built UniVRM runtime (see README)." />
+  </Target>
+</Project>

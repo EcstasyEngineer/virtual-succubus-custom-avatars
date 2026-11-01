@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+    <GameDir Condition="'$(GameDir)' == ''">$(VIRTUAL_GAME_DIR)</GameDir>
+    <Managed>$(GameDir)\Virtual Succubus_Data\Managed</Managed>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="../../src/FacialIntent.cs" Link="FacialIntent.cs" />
+    <Compile Include="../../src/VrmFacialAdapter.cs" Link="VrmFacialAdapter.cs" />
+    <Compile Include="Program.cs" />
+    <Reference Include="UnityEngine"><HintPath>$(Managed)\UnityEngine.dll</HintPath></Reference>
+    <Reference Include="UnityEngine.CoreModule"><HintPath>$(Managed)\UnityEngine.CoreModule.dll</HintPath></Reference>
+    <Reference Include="UnityEngine.AnimationModule"><HintPath>$(Managed)\UnityEngine.AnimationModule.dll</HintPath></Reference>
+  </ItemGroup>
+  <Target Name="CheckLocalReferences" BeforeTargets="ResolveReferences">
+    <Error Condition="!Exists('$(Managed)\UnityEngine.CoreModule.dll')" Text="Set VIRTUAL_GAME_DIR or pass -p:GameDir for a compatible local installation. No engine binaries are supplied." />
+  </Target>
+</Project>

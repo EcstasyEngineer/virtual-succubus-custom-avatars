@@ -1,0 +1,6 @@
+{
+  "id": "ani-model01",
+  "name": "Ani Model 01 (classic)",
+  "bundle": "model01/ani-01-classic.bundle",
+  "prefab": "assets/avatarreplacement/ani-01-classic.prefab"
+}

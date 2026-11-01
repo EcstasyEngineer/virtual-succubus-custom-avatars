@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Facial intent frame v1",
+  "description": "Portable definition of the current FacialIntent buffer. This schema documents interchange; the plugin does not expose a JSON command input. A frame replaces all 16 values; omitted values are zero. Pose, target gaze and material effects are separate.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "weights"],
+  "properties": {
+    "schemaVersion": {"const": 1},
+    "weights": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "emotion.angry": {"$ref": "#/$defs/weight"},
+        "emotion.fun": {"$ref": "#/$defs/weight"},
+        "emotion.joy": {"$ref": "#/$defs/weight"},
+        "emotion.sorrow": {"$ref": "#/$defs/weight"},
+        "emotion.surprised": {"$ref": "#/$defs/weight"},
+        "brows.angry": {"$ref": "#/$defs/weight"},
+        "eyes.angry": {"$ref": "#/$defs/weight"},
+        "blink.both": {"$ref": "#/$defs/weight"},
+        "blink.left": {"$ref": "#/$defs/weight"},
+        "blink.right": {"$ref": "#/$defs/weight"},
+        "mouth.angry": {"$ref": "#/$defs/weight"},
+        "mouth.a": {"$ref": "#/$defs/weight"},
+        "mouth.i": {"$ref": "#/$defs/weight"},
+        "mouth.u": {"$ref": "#/$defs/weight"},
+        "mouth.e": {"$ref": "#/$defs/weight"},
+        "mouth.o": {"$ref": "#/$defs/weight"}
+      }
+    }
+  },
+  "$defs": {"weight": {"type": "number", "minimum": 0, "maximum": 1}}
+}

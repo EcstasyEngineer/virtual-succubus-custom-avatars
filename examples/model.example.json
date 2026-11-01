@@ -1,0 +1,6 @@
+{
+  "id": "example-model",
+  "name": "Example prepared model",
+  "bundle": "model.bundle",
+  "prefab": "assets/avatarreplacement/model.prefab"
+}
